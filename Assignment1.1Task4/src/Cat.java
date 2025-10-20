@@ -8,7 +8,6 @@ public class Cat {
     public void meow() {
         System.out.println("The cat named " + name + " says: Meow!");
     }
-
     public static void main(String[] args) {
         // Create an instance of the Cat class with a name
         Cat Whiskers = new Cat("Whiskers");
