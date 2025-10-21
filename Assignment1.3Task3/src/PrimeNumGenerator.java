@@ -32,3 +32,4 @@ public class PrimeNumGenerator {
         return true;
     }
 }
+
