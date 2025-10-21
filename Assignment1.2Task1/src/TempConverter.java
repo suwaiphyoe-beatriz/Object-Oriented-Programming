@@ -13,7 +13,7 @@ public class TempConverter {
 
         double celsius = (fahrenheit - TEMP_ADJUSTMENT) * TEMP_FACTOR;
 
-        // Display the converted temperature, formatted to one decimal place,
+        // Display the converted temperature, formatted to one decimal place
         System.out.printf("The temperature in Celsius is: %.1f\n", celsius);
 
     }
