@@ -1,5 +1,4 @@
 import java.util.Scanner;
-
 public class Medievalconverter {
     public static void main(String[] args) {
         final double luotiInGrams = 13.28;
