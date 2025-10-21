@@ -12,7 +12,6 @@ public class Triangles {
         double heightsquared = Math.pow(height, 2);
         double sumOfSquares = lengthsquared + heightsquared ;
 
-
         double hypotenuse = Math.sqrt(sumOfSquares);
 
         System.out.printf("The length of the hypotenuse is: %.4f\n", hypotenuse);
