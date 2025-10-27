@@ -1,43 +1,28 @@
 package Task1;
 
 public class TelevisionViewer {
-    private Television tv;
-    private int day;
+    public static void main(String[] args) {
+        Television myTV = new Television();
+        myTV.setChannel(1);
 
-    public TelevisionViewer() {
-        tv = new Television();
-        day = 1;
-    }
-
-    public void liveWeek() {
-        for (int i = 0; i < 10; i++) {
+        for (int day = 1; day <= 10; day++) {
             System.out.println("Woke up, day " + day);
 
-            if (day == 1) {
-                // Day 1 to 3 channels
-                watchChannels(3);
-            } else if (day % 2 == 0) {
-                // Even days (2, 4, 6, 8, 10)  4 channels
-                watchChannels(4);
-            } else {
-                // Odd days after 1 (3, 5, 7, 9) 6 channels
-                watchChannels(6);
+            boolean tired = false;
+
+            if (!myTV.isOn())
+                myTV.pressOnOff();
+
+            while (!tired) {
+                System.out.println("Watching channel " + myTV.getChannel());
+                myTV.setChannel(myTV.getChannel() + 1);
+                if (myTV.getChannel() % 4 == 0)
+                    tired = true;
             }
 
+            myTV.pressOnOff();
+
             System.out.println("Falling asleep");
-            day++;
         }
-    }
-
-    private void watchChannels(int count) {
-        for (int i = 0; i < count; i++) {
-            tv.watch();
-            tv.nextChannel();
-        }
-    }
-
-    public static void main(String[] args) {
-        TelevisionViewer viewer = new TelevisionViewer();
-        viewer.liveWeek();
     }
 }

@@ -2,20 +2,32 @@ package Task1;
 
 public class Television {
     private int channel;
-    private final int maxChannel = 10;
+    private boolean on;
 
     public Television() {
-        channel = 1; // start on ch1
+        this.channel = 1;
+        this.on = false;
     }
 
-    public void watch() {
-        System.out.println("Watching channel " + channel);
+    public int getChannel() {
+        return channel;
     }
 
-    public void nextChannel() {
-        channel++;
-        if (channel > maxChannel) {
-            channel = 1; // wrap back to ch1 after ch 10
+    public void setChannel(int newChannel) {
+        if (newChannel > 10) {
+            this.channel = 1;
+        } else if (newChannel < 1) {
+            this.channel = 1;
+        } else {
+            this.channel = newChannel;
         }
+    }
+
+    public boolean isOn() {
+        return on;
+    }
+
+    public void pressOnOff() {
+        on = !on;
     }
 }
