@@ -12,7 +12,6 @@ public class Television {
     public int getChannel() {
         return channel;
     }
-
     public void setChannel(int newChannel) {
         if (newChannel > 10) {
             this.channel = 1;
