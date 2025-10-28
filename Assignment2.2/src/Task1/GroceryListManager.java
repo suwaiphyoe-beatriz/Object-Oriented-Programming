@@ -49,7 +49,7 @@ public class GroceryListManager {
         manager.addItem("Apples");
         manager.addItem("Milk");
         manager.addItem("Bread");
-        manager.addItem("Milk"); // checking duplicates
+        manager.addItem("Milk"); // checking duplicate
 
         manager.displayList();
 
