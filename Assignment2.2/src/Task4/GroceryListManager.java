@@ -31,7 +31,7 @@ public class GroceryListManager {
         }
     }
 
-    // Update the quantity of a specific item
+    // updating the quantity of a specific item
     public void updateQuantity(String item, int newQuantity) {
         if (groceryList.containsKey(item)) {
             groceryList.get(item).quantity = newQuantity;
@@ -120,8 +120,8 @@ public class GroceryListManager {
         manager.addItem("Apples", 2.50, "Fruits", 5);
         manager.addItem("Milk", 1.75, "Dairy", 2);
         manager.addItem("Bread", 2.00, "Bakery", 1);
-        manager.addItem("Cheese", 3.50, "Dairy", 0); // zero quantity test
-        manager.addItem("Apples", 2.50, "Fruits", 3); // duplicate item test (adds more quantity)
+        manager.addItem("Cheese", 3.50, "Dairy", 0); // zero quantity check
+        manager.addItem("Apples", 2.50, "Fruits", 5); // duplicate item checking (adds more quantity)
 
         manager.displayList();
 
