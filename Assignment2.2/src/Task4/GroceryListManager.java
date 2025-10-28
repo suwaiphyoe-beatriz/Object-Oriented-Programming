@@ -16,7 +16,7 @@ public class GroceryListManager {
         }
     }
 
-    private HashMap<String, Task4.GroceryListManager.Item> groceryList = new HashMap<>();
+    private HashMap<String, Item> groceryList = new HashMap<>();
 
     // adding an item with cost and category
     public void addItem(String item, double cost, String category, int quantity) {
@@ -26,7 +26,7 @@ public class GroceryListManager {
             existing.quantity += quantity;
         }
         else {
-            groceryList.put(item, new Task4.GroceryListManager.Item(cost, category, quantity));
+            groceryList.put(item, new Item(cost, category, quantity));
             System.out.println("Added \"" + item + "\" (" + category + ") - $" + cost + quantity);
         }
     }
@@ -88,7 +88,7 @@ public class GroceryListManager {
         System.out.println("\nItems in category: " + category);
         boolean found = false;
         int i = 1;
-        for (Map.Entry<String, Task4.GroceryListManager.Item> entry : groceryList.entrySet()) {
+        for (Map.Entry<String, Item> entry : groceryList.entrySet()) {
             if (entry.getValue().category.equalsIgnoreCase(category)) {
                 System.out.printf("%d. %s - $%.2f%n", i++, entry.getKey(), entry.getValue().cost);
                 found = true;
@@ -114,7 +114,7 @@ public class GroceryListManager {
     }
 
     public static void main(String[] args) {
-        Task4.GroceryListManager manager = new Task4.GroceryListManager();
+        GroceryListManager manager = new GroceryListManager();
 
         // adding items with cost, category, and quantity
         manager.addItem("Apples", 2.50, "Fruits", 5);
