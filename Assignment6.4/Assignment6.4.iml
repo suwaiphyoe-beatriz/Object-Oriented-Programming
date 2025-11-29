@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="NewModuleRootManager">
+    <output url="file://$MODULE_DIR$/../../Assignment6.4/out/production/Assignment6.4" />
+    <output-test url="file://$MODULE_DIR$/../../Assignment6.4/out/production/Assignment6.4" />
+    <exclude-output />
+    <content url="file://$MODULE_DIR$/../../Assignment6.4">
+      <sourceFolder url="file://$MODULE_DIR$/../../Assignment6.4/src" isTestSource="false" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="javafx-swt2" level="project" />
+  </component>
+</module>
