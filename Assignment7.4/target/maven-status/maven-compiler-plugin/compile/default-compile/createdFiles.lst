@@ -1,0 +1,6 @@
+dao/CurrencyDao.class
+application/CurrencyApp.class
+datasource/MariaDbJpaConnection.class
+entity/Currency.class
+dao/TransactionDao.class
+entity/Transaction.class
