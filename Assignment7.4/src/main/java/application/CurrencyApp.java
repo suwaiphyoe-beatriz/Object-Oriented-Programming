@@ -6,15 +6,14 @@ import entity.Transaction;
 import entity.Currency;
 import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Alert;
+import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import javafx.stage.Modality;
 import javafx.geometry.Insets;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.scene.control.cell.PropertyValueFactory;
 import java.util.List;
 
 public class CurrencyApp extends Application {
@@ -26,6 +25,8 @@ public class CurrencyApp extends Application {
     private ComboBox<Currency> cbTo;
     private TextField tfAmount;
     private Label lblResult;
+
+    private TableView<Transaction> tvTransactions;  //adding Tableview UI
 
     public static void main(String[] args) {
         launch(args);
@@ -57,15 +58,42 @@ public class CurrencyApp extends Application {
         grid.add(lblResult, 1, 4);
         grid.add(btnAddCurrency, 1, 5);
 
-        initializeCurrencies();
 
+        //adding Tableview UI
+        tvTransactions = new TableView<>();
+
+        TableColumn<Transaction, Double> colAmount = new TableColumn<>("Amount");
+        colAmount.setCellValueFactory(new PropertyValueFactory<>("amount"));
+
+        TableColumn<Transaction, Double> colResult = new TableColumn<>("Result");
+        colResult.setCellValueFactory(new PropertyValueFactory<>("result"));
+
+        TableColumn<Transaction, String> colSource = new TableColumn<>("From");
+        colSource.setCellValueFactory(data ->
+                new SimpleStringProperty(data.getValue().getSourceCurrency().getAbbreviation())
+        );
+
+        TableColumn<Transaction, String> colTarget = new TableColumn<>("To");
+        colTarget.setCellValueFactory(data ->
+                new SimpleStringProperty(data.getValue().getTargetCurrency().getAbbreviation())
+        );
+
+        tvTransactions.getColumns().addAll(colAmount, colResult, colSource, colTarget);
+
+        grid.add(new Label("Transactions:"), 0, 6);
+        grid.add(tvTransactions, 0, 7, 2, 1);
+
+        // Load existing transactions
+        loadTransactions();
+
+
+        initializeCurrencies();
         updateCurrencyComboBoxes();
 
         btnConvert.setOnAction(e -> convertCurrency());
-
         btnAddCurrency.setOnAction(e -> openAddCurrencyWindow());
 
-        primaryStage.setScene(new Scene(grid, 400, 300));
+        primaryStage.setScene(new Scene(grid, 500, 500));
         primaryStage.show();
     }
 
@@ -110,15 +138,24 @@ public class CurrencyApp extends Application {
             double result = amount * (to.getRateToUsd() / from.getRateToUsd());
             lblResult.setText(String.format("%.4f %s", result, to.getAbbreviation()));
 
-            // Persist the transaction
+            // Persist transaction
             Transaction tx = new Transaction(from, to, amount, result);
             transactionDao.persist(tx);
+
+            // Refresh table
+            loadTransactions();
 
         } catch (NumberFormatException e) {
             showError("Please enter a valid amount.");
         } catch (Exception e) {
             showError("Conversion error: " + e.getMessage());
         }
+    }
+
+    private void loadTransactions() {
+        tvTransactions.setItems(
+                FXCollections.observableArrayList(transactionDao.findAll())
+        );
     }
 
     private void openAddCurrencyWindow() {
@@ -152,7 +189,7 @@ public class CurrencyApp extends Application {
                 Currency currency = new Currency(abbr, name, rate);
                 currencyDao.persist(currency);
                 stage.close();
-                updateCurrencyComboBoxes(); // refresh main UI
+                updateCurrencyComboBoxes();
             } catch (Exception ex) {
                 showError("Error adding currency: " + ex.getMessage());
             }
@@ -169,6 +206,4 @@ public class CurrencyApp extends Application {
         alert.setContentText(msg);
         alert.showAndWait();
     }
-
-
 }

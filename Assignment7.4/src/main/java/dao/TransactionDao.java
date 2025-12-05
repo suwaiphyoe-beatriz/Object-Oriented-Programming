@@ -8,15 +8,14 @@ public class TransactionDao {
 
     public void persist(Transaction tx) {
         EntityManager em = MariaDbJpaConnection.getInstance();
-        try {
-            em.getTransaction().begin();
-            em.persist(tx);
-            em.getTransaction().commit();
-        } catch (Exception e) {
-            if (em.getTransaction().isActive()) em.getTransaction().rollback();
-            throw e;
-        } finally {
-            em.close();
-        }
+        em.getTransaction().begin();
+        em.persist(tx);
+        em.getTransaction().commit();
+    }
+
+    public java.util.List<Transaction> findAll() {
+        EntityManager em = MariaDbJpaConnection.getInstance();
+        return em.createQuery("SELECT t FROM Transaction t", Transaction.class)
+                .getResultList();
     }
 }
