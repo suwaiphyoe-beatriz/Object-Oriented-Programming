@@ -33,3 +33,4 @@ class PalindromeCheckerTest {
         assertTrue(checker.isPalindrome("a"));
     }
 }
+
