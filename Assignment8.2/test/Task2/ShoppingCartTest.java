@@ -38,3 +38,4 @@ class ShoppingCartTest {
         assertEquals(0.0, cart.calculateTotal(), 0.01);
     }
 }
+
