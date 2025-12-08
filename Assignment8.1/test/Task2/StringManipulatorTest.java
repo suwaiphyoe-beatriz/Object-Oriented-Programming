@@ -39,3 +39,4 @@ class StringManipulatorTest {
         assertFalse(sm.containsSubstring(null, "x")); // defensive case
     }
 }
+
