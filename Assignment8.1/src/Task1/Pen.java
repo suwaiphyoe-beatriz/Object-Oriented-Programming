@@ -44,6 +44,8 @@ public class Pen {
         }
     }
 
+
+
     public String draw() {
         if (capOn) return "";
         return "Drawing " + color;
